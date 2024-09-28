@@ -1,0 +1,31 @@
+# Base Images
+## 从天池基础镜像构建(from的base img 根据自己的需要更换，建议使用天池open list镜像链接：https://tianchi.aliyun.com/forum/postDetail?postId=67720)
+FROM registry.cn-shanghai.aliyuncs.com/tcc_public/python:3.10
+##安装依赖包
+# RUN pip install torch==2.4.0 torchvision==0.19.0 torchaudio --index-url https://pypi.tuna.tsinghua.edu.cn/simple 
+# RUN pip install transformers==4.42.4 -i https://pypi.tuna.tsinghua.edu.cn/simple 
+# RUN pip install peft==0.12.0 -i https://pypi.tuna.tsinghua.edu.cn/simple 
+# RUN pip install pandas==2.2.2 -i https://pypi.tuna.tsinghua.edu.cn/simple 
+# RUN pip install tqdm -i https://pypi.tuna.tsinghua.edu.cn/simple 
+# RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple auto-gptq
+# # RUN git clone https://github.com/AutoGPTQ/AutoGPTQ.git
+# # RUN pip install .
+# RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple optimum
+# RUN pip install openai loguru httpx -i https://pypi.tuna.tsinghua.edu.cn/simple
+# RUN pip install vllm==0.5.5 -i https://pypi.tuna.tsinghua.edu.cn/simple
+## 把当前文件夹里的文件构建到镜像的根目录下,并设置为默认工作目录
+
+#-----------------------------新版环境--------------------------------------
+RUN pip install torch==2.4.0 torchvision==0.19.0 torchaudio --index-url https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install transformers==4.44.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install peft -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install pandas==2.2.2 -i https://pypi.tuna.tsinghua.edu.cn/simple 
+RUN pip install tqdm -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install vllm==0.5.5 -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install auto_gptq -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUn pip install openai loguru httpx -i https://pypi.tuna.tsinghua.edu.cn/simple
+COPY app /app
+# ADD . /
+WORKDIR /app
+## 镜像启动后统一执行 sh run.sh
+CMD ["sh", "run.sh"]
